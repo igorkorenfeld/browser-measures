@@ -1,10 +1,13 @@
 let running = true;
 
-let lines = [];
+/* Each "mark" is a an array of 2 div that create a intersecting lines. 
+ * The [0] is the vertical line and the [1] is the horiztonal line
+ * */
+let marks = [];
 
-createLines();
+createMarks();
 
-function createLines() {
+function createMarks() {
   const vLine = document.createElement("div");
   const hLine = document.createElement("div");
 
@@ -12,7 +15,7 @@ function createLines() {
   vLine.style.top = `0`;
   vLine.style.left = `0`;
   vLine.style.width = "1px";
-  vLine.style.height = `${document.body.scrollHeight}px`;
+  vLine.style.height = `${window.innerHeight}px`;
   vLine.style.borderLeft = "1px solid rgba(250, 0, 250, .5)";
 
   hLine.style.position = "absolute";
@@ -24,20 +27,82 @@ function createLines() {
 
   document.body.appendChild(vLine);
   document.body.appendChild(hLine);
-  lines.push([vLine, hLine]);
+  marks.push([vLine, hLine]);
+  
+  // Can consider using an object for clarity
+  // marks.push({
+  //   vertical: vLine, 
+  //   horizontal: hLine,
+  //   x: vLine.style.left,
+  //   x: vLine.style.left,
+  // });
+
+}
+
+/* Expects two marks a, b. Returns an object with two properties 
+ * dx - horizontal distance  
+ * dy - veritcal distance 
+ */ 
+function calculateDistances(a, b) {
+  // Horizontal distance
+  console.log(parseInt(a[0].style.left) - parseInt(b[0].style.left));
+  // Vertical distance
+  console.log(parseInt(a[1].style.top) - parseInt(b[1].style.top));
+  const distances = { 
+    dx: parseInt(a[0].style.left) - parseInt(b[0].style.left), 
+    dy: parseInt(a[1].style.top) - parseInt(b[1].style.top)
+  };
+  dxLabel = document.createElement("div");
+  dyLabel = document.createElement("div");
+  dxLabel.appendChild(document.createTextNode(`${Math.abs(distances.dx)}`));
+  dyLabel.appendChild(document.createTextNode(`${Math.abs(distances.dy)}`));
+  
+  dxLabel.style.position = "absolute";
+  dyLabel.style.position = "absolute";
+  
+  // a.x < b.x
+  if (distances.dx < 0) {
+    dxLabel.style.left = a[0].style.left;
+  }
+  // a.x > b.x
+  else {
+    dxLabel.style.left = b[0].style.left;
+  }
+  // a.y < b.y , which means a is above b
+  if (distances.dy < 0) {
+    dxLabel.style.top = `${parseInt(b[1].style.top) - 16}px`;
+    // dyLabel.style.top = `${parseInt(b[0].style.top) - 16}px`;
+  }
+  else {
+    dxLabel.style.top = `${parseInt(a[1].style.top) - 16}px`;
+    // dyLabel.style.top = `${parseInt(a[0].style.top) - 16}px`;
+  } 
+  // dxLabel.style.width = `${Math.abs(distances.dx)}`;
+  dxLabel.style.width = "20px";
+  dxLabel.style.width = `${Math.abs(distances.dx)}px`;
+  dxLabel.style.textAlign = "center"; 
+  dxLabel.style.backgroundColor = "rgba(125, 16, 83, 0.75)"
+  dxLabel.style.color = "rgba(250, 210, 250, .9)"
+  document.body.appendChild(dxLabel);
+
 }
 
 function updateLines(e) {
   //vLine
-  lines[lines.length - 1][0].style.left = `${e.clientX}px`;
+  marks[marks.length - 1][0].style.left = `${e.clientX}px`;
   
   //hLine
-  lines[lines.length - 1][1].style.top = `${e.clientY}px`;
-  console.log(e.clientX, e.clientY);
+  marks[marks.length - 1][1].style.top = `${e.clientY}px`;
 }
 
 function handleClick() {
-  createLines();
+  createMarks();
+  console.log("marks length:");
+  console.log(marks.length);
+  console.log(marks);
+  if (marks.length > 2) {
+    calculateDistances(marks[marks.length - 3], marks[marks.length - 2]);
+  }
 }
 
 document.addEventListener("mousemove", updateLines);
