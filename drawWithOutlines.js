@@ -1,6 +1,6 @@
 let running = true;
 
-const marks = [];
+let marks = [];
 
 const outlineStyle = `
 .keyOutline {
