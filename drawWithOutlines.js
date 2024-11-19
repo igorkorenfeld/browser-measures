@@ -27,10 +27,18 @@ function removeOutline(e) {
   e.target.classList.remove("keyOutline"); 
 }
 
+function clearLines() {
+  document.querySelectorAll(".keyOutline").forEach((el) => el.classList.remove("keyOutline"));
+  marks.forEach((mark) => {
+    if (mark.parentNode) {
+      mark.parentNode.removeChild(mark);
+    }
+  });
+} 
+
 function handleKeypress(e) {
   if (e.code === 'KeyX')  {
-    document.querySelectorAll(".keyOutline").forEach((el) => el.classList.remove("keyOutline"));
-    marks.forEach((mark) => document.body.removeChild(mark));
+    clearLines();
     document.removeEventListener("click", drawNearest);
     document.removeEventListener("keyup", handleKeypress);
     document.querySelectorAll("*").forEach((el) => {
@@ -44,6 +52,10 @@ function handleKeypress(e) {
     if (!running) {
     document.querySelectorAll(".keyOutline").forEach((el) => el.classList.remove("keyOutline"));
     }
+  }
+
+  else if (e.code === 'KeyC') {
+    clearLines();
   }
 }
 
@@ -65,7 +77,7 @@ function drawNearest(e) {
   vCropmark.style.top = `0`;
   vCropmark.style.left = `${rect.left + window.scrollX}px`;
   vCropmark.style.width = "1px";
-  vCropmark.style.height = `${document.body.scrollHeight}px`;
+  vCropmark.style.height = `${window.innerHeight}px`;
   vCropmark.style.borderLeft = "1px solid rgba(250, 0, 250, .5)";
 
   //Top keyline
