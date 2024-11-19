@@ -82,8 +82,7 @@ function handleClick() {
   }
 }
 
-function handleKeypress(e) {
-  if (e.code === 'KeyX')  {
+function clearLines() {
     marks.forEach((mark) => {
       document.body.removeChild(mark);
     });
@@ -92,15 +91,18 @@ function handleKeypress(e) {
       document.body.removeChild(label);
     });
     labels = [];
+}
+
+function handleKeypress(e) {
+  if (e.code === 'KeyX')  {
+    clearLines();
     document.removeEventListener("mousemove", updateLines);
     document.removeEventListener("click", handleClick);
     document.removeEventListener("keyup", handleKeypress);
   }
-  else if (e.code === 'KeyP') {
-    running = !running; 
-    if (!running) {
-    document.querySelectorAll(".keyOutline").forEach((el) => el.classList.remove("keyOutline"));
-    }
+  else if (e.code === 'KeyC') {
+    clearLines();
+    createMarks();
   }
 }
 
