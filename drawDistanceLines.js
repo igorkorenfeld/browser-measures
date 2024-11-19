@@ -31,25 +31,12 @@ function createMarks() {
   document.body.appendChild(hLine);
   marks.push([vLine, hLine]);
   
-  // Can consider using an object for clarity
-  // marks.push({
-  //   vertical: vLine, 
-  //   horizontal: hLine,
-  //   x: vLine.style.left,
-  //   x: vLine.style.left,
-  // });
-
-}
 
 /* Expects two marks a, b. Returns an object with two properties 
  * dx - horizontal distance  
  * dy - veritcal distance 
  */ 
 function calculateDistances(a, b) {
-  // Horizontal distance
-  console.log(parseInt(a[0].style.left) - parseInt(b[0].style.left));
-  // Vertical distance
-  console.log(parseInt(a[1].style.top) - parseInt(b[1].style.top));
   const distances = { 
     dx: parseInt(a[0].style.left) - parseInt(b[0].style.left), 
     dy: parseInt(a[1].style.top) - parseInt(b[1].style.top)
@@ -117,9 +104,6 @@ function updateLines(e) {
 
 function handleClick() {
   createMarks();
-  console.log("marks length:");
-  console.log(marks.length);
-  console.log(marks);
   if (marks.length > 2) {
     calculateDistances(marks[marks.length - 3], marks[marks.length - 2]);
   }

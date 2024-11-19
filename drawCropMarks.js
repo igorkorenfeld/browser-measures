@@ -1,5 +1,3 @@
-// let el = document.querySelector('a[href="/wiki/Seven_Summits"]');
-// let rect = el.getBoundingClientRect(); 
 
 let running = true;
 const marks = [];
@@ -10,19 +8,11 @@ function drawNearest(e) {
   let ex = e.clientX;
   let ey = e.clientY;
   let el = document.elementFromPoint(ex, ey)
-  // console.log("Element position:");
-  // console.log(document.elementsFromPoint(ex, ey));
-  // console.log(el);
-  // console.log("Mouse position:");
-  // console.log(ex, ey);
   let rect = el.getBoundingClientRect();
   let vCropmark = document.createElement("div");
   let tCropmark = document.createElement("div");
   let bCropmark = document.createElement("div");
   marks.push(vCropmark, tCropmark, bCropmark);
-
-  // console.log("Rect");
-  // console.log(rect);
 
   //Left keyline
   vCropmark.style.position = "absolute";

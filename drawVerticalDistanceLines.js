@@ -29,7 +29,6 @@ function createMarks() {
  */ 
 function calculateDistances(a, b) {
   // Vertical distance
-  console.log(parseInt(a.style.top) - parseInt(b.style.top));
   const dy = parseInt(a.style.top) - parseInt(b.style.top);
   dyLabel = document.createElement("div");
   labels.push(dyLabel);
@@ -67,9 +66,6 @@ function updateLines(e) {
 
 function handleClick() {
   createMarks();
-  console.log("marks length:");
-  console.log(marks.length);
-  console.log(marks);
   if (marks.length > 2) {
     calculateDistances(marks[marks.length - 3], marks[marks.length - 2]);
   }
