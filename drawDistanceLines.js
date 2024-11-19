@@ -1,4 +1,5 @@
 let running = true;
+const fontSize = 12;
 
 /* Each "mark" is a an array of 2 div that create a intersecting lines. 
  * The [0] is the vertical line and the [1] is the horiztonal line
@@ -63,28 +64,45 @@ function calculateDistances(a, b) {
   // a.x < b.x
   if (distances.dx < 0) {
     dxLabel.style.left = a[0].style.left;
+    dyLabel.style.left = a[0].style.left;
   }
   // a.x > b.x
   else {
     dxLabel.style.left = b[0].style.left;
+    dyLabel.style.left = b[0].style.left;
   }
   // a.y < b.y , which means a is above b
   if (distances.dy < 0) {
-    dxLabel.style.top = `${parseInt(b[1].style.top) - 16}px`;
+    dxLabel.style.top = `${parseInt(b[1].style.top) - fontSize - 2}px`;
+    dyLabel.style.top = `${parseInt(a[1].style.top)}px` 
     // dyLabel.style.top = `${parseInt(b[0].style.top) - 16}px`;
   }
   else {
-    dxLabel.style.top = `${parseInt(a[1].style.top) - 16}px`;
+    dxLabel.style.top = `${parseInt(a[1].style.top) - fontSize - 2}px`;
+    dyLabel.style.top = `${parseInt(b[1].style.top)}px` 
     // dyLabel.style.top = `${parseInt(a[0].style.top) - 16}px`;
   } 
   // dxLabel.style.width = `${Math.abs(distances.dx)}`;
-  dxLabel.style.width = "20px";
   dxLabel.style.width = `${Math.abs(distances.dx)}px`;
   dxLabel.style.textAlign = "center"; 
   dxLabel.style.backgroundColor = "rgba(125, 16, 83, 0.75)"
-  dxLabel.style.color = "rgba(250, 210, 250, .9)"
+  dxLabel.style.color = "rgba(242, 221, 242, 0.9)"
+  dxLabel.style.fontFamily = "monospace, monospace";
+  dxLabel.style.fontSize = `${fontSize}px`;
+
   document.body.appendChild(dxLabel);
 
+
+  dyLabel.style.height = `${Math.abs(distances.dy)}px`;
+  dyLabel.style.verticalAlign = "middle"; 
+  dyLabel.style.backgroundColor = "rgba(125, 16, 83, 0.75)";
+  dyLabel.style.color = "rgba(242, 221, 242, 0.9)";
+  dyLabel.style.display = "flex";
+  dyLabel.style.alignItems = "center";
+  dyLabel.style.fontFamily = "monospace, monospace";
+  dyLabel.style.fontSize = `${fontSize}px`;
+
+  document.body.appendChild(dyLabel);
 }
 
 function updateLines(e) {
