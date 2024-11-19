@@ -55,6 +55,7 @@ function calculateDistances(a, b) {
   dyLabel.style.alignItems = "center";
   dyLabel.style.fontFamily = "monospace, monospace";
   dyLabel.style.fontSize = `${fontSize}px`;
+  dyLabel.style.left = `${((labels.length - 1) * fontSize * 2) % document.body.scrollWidth}px`;
 
   document.body.appendChild(dyLabel);
 }
