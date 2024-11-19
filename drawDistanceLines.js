@@ -5,6 +5,7 @@ const fontSize = 12;
  * The [0] is the vertical line and the [1] is the horiztonal line
  * */
 let marks = [];
+let labels = [];
 
 createMarks();
 
@@ -55,6 +56,7 @@ function calculateDistances(a, b) {
   };
   dxLabel = document.createElement("div");
   dyLabel = document.createElement("div");
+  labels.push([dxLabel, dyLabel]);
   dxLabel.appendChild(document.createTextNode(`${Math.abs(distances.dx)}`));
   dyLabel.appendChild(document.createTextNode(`${Math.abs(distances.dy)}`));
   
@@ -123,5 +125,30 @@ function handleClick() {
   }
 }
 
+function handleKeypress(e) {
+  if (e.code === 'KeyX')  {
+    marks.forEach((mark) => {
+      document.body.removeChild(mark[0]);
+      document.body.removeChild(mark[1]);
+    });
+    marks = [];
+    labels.forEach((label) => {
+      document.body.removeChild(label[0]);
+      document.body.removeChild(label[1]);
+    });
+    labels = [];
+    document.removeEventListener("mousemove", updateLines);
+    document.removeEventListener("click", handleClick);
+    document.removeEventListener("keyup", handleKeypress);
+  }
+  else if (e.code === 'KeyP') {
+    running = !running; 
+    if (!running) {
+    document.querySelectorAll(".keyOutline").forEach((el) => el.classList.remove("keyOutline"));
+    }
+  }
+}
+
 document.addEventListener("mousemove", updateLines);
 document.addEventListener("click", handleClick);
+document.addEventListener("keyup", handleKeypress);
