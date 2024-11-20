@@ -1,4 +1,4 @@
-const running = true;
+let running = true;
 const outlineStyle = `
 * {
   outline: 2px solid rgba(152, 234, 158, 0.65);
@@ -12,7 +12,9 @@ function addOutlines() {
 }
 
 function removeOutlines() {
-  document.body.removeChild(styleSheet);
+  if (styleSheet.parentNode) {
+    styleSheet.parentNode.removeChild(styleSheet);
+  };
 }
 
 function handleKeypress(e) {
@@ -28,6 +30,7 @@ function handleKeypress(e) {
     else {
       addOutlines();
     }
+    running = !running;
   }
 }
 
