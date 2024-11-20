@@ -1,5 +1,10 @@
 let running = true;
 const fontSize = 12;
+const docHeight = Math.max(
+  document.body.scrollHeight, document.documentElement.scrollHeight,
+  document.body.offsetHeight, document.documentElement.offsetHeight,
+  document.body.clientHeight, document.documentElement.clientHeight
+);
 
 /* Each "mark" is a veritcal line to denote horizontal distances*/
 let marks = [];
@@ -14,15 +19,18 @@ function createMarks() {
   vLine.style.top = `0`;
   vLine.style.left = `0`;
   vLine.style.width = "1px";
-  vLine.style.height = `${window.innerHeight}px`;
+  vLine.style.height = `${docHeight}px`;
   vLine.style.borderLeft = "1px solid rgba(250, 0, 250, .5)";
 
   document.body.appendChild(vLine);
   marks.push(vLine);
 }
 
-/* Expects two marks a, b, and add the calculated distance to the screen */
-function calculateDistances(a, b) {
+/* Expects two marks a, b, and add the calculated distance to the screen 
+ * along with the clientY position to plot the label
+ * */
+
+function calculateDistances(a, b, clientY) {
   // Vertical distance
   console.log(parseInt(a.style.left) - parseInt(b.style.left));
   const dx = parseInt(a.style.left) - parseInt(b.style.left);
@@ -48,7 +56,7 @@ function calculateDistances(a, b) {
   dxLabel.style.fontFamily = "monospace, monospace";
   dxLabel.style.fontSize = `${fontSize}px`;
 
-  dxLabel.style.top = `${((labels.length - 1) * fontSize) % document.body.scrollHeight}px`;
+  dxLabel.style.top = `${clientY + window.scrollY}px`;
 
   document.body.appendChild(dxLabel);
 }
@@ -58,14 +66,14 @@ function updateLines(e) {
   marks[marks.length - 1].style.left = `${e.clientX}px`;
 }
 
-function handleClick() {
+function handleClick(e) {
   if (!running) { return; }
   createMarks();
   console.log("marks length:");
   console.log(marks.length);
   console.log(marks);
   if (marks.length > 2) {
-    calculateDistances(marks[marks.length - 3], marks[marks.length - 2]);
+    calculateDistances(marks[marks.length - 3], marks[marks.length - 2], e.clientY);
   }
 }
 

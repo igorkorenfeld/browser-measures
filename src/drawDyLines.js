@@ -54,7 +54,7 @@ function calculateDistances(a, b) {
 
 function updateLines(e) {
   if (!running) { return; }
-  marks[marks.length - 1].style.top = `${e.clientY}px`;
+  marks[marks.length - 1].style.top = `${e.clientY + window.scrollY}px`;
 }
 
 function handleClick() {
