@@ -30,7 +30,7 @@ function createMarks() {
   document.body.appendChild(vLine);
   document.body.appendChild(hLine);
   marks.push([vLine, hLine]);
-
+}
 
 /* Expects two marks a, b. Returns an object with two properties
  * dx - horizontal distance
@@ -136,3 +136,4 @@ function handleKeypress(e) {
 document.addEventListener("mousemove", updateLines);
 document.addEventListener("click", handleClick);
 document.addEventListener("keyup", handleKeypress);
+
