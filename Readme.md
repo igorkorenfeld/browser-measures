@@ -1,4 +1,4 @@
-# Browser-measure
+# Browser measure
 This repo has a set of tools that will help measure distancee and draw lines to check alignment on a webpage. The tools are intended to be used as bookmarklets, or alternatively via the browser devtools JS console.
 
 
@@ -10,8 +10,9 @@ This repo has a set of tools that will help measure distancee and draw lines to 
 
 `c` - **C**lear any existing lines and continue adding new lines
 
+
 ## Draw Vertical/Horizontal Lines 
-`drawHorizontalDistanceLines` and `drawVerticalDistanceLines` are similar to the `drawDistanceLines` but will only draw the horizontal and vertical lines, and add the labels to note distance between those lines.
+`drawHorizontalDistanceLines` and `drawVerticalDistanceLines` are similar to the `drawDistanceLines` but will only draw the horizontal or vertical lines. It will also add the labels to note distance between those lines.
 
 ### Keys
 `x` - E**x**it the tool
@@ -28,3 +29,16 @@ This repo has a set of tools that will help measure distancee and draw lines to 
 `c` - **C**lear any existing lines and continue adding new lines
 
 `p` - **P**ause the tool but keep existing lines, clear all outlines. Pause can be toggled on and off
+
+## Make Outlines
+`makeOutlines` will add an outline around every element on the page. 
+ 
+### Keys
+`x` - E**x**it the tool
+
+`p` - **P**ause the tool, removing the outlines. Pause can be toggled on and off – unpausing will restore the outlines
+
+### Bookmarklet code
+```
+javascript:(function(){ let e=!0;const n=document.createElement("style");function t(){document.body.appendChild(n)}function o(){n.parentNode&&n.parentNode.removeChild(n)}n.textContent="\n* {\n  outline: 2px solid rgba(152, 234, 158, 0.65);\n}\n",document.addEventListener("keyup",(function n(d){"KeyX"===d.code?(o(),document.removeEventListener("keyup",n)):"KeyP"===d.code&&(e?o():t(),e=!e)})),t();})();
+```
