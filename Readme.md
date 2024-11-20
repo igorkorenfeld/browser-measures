@@ -19,6 +19,7 @@ This repo has a set of tools that will help measure distancee and draw lines to 
 
 `c` - **C**lear any existing lines and continue adding new lines
 
+`p` - **P**ause the tool, will keep existing lines on the page but will not create a new line to place on click.Pause can be toggled on and off.
 
 ## Draw with Outlines
 `drawWithOutlines` will highlight the element that is currently under the cursor (along with with it's parent elements), while the element is being hovered. On click It will add a left vertical, as well as top and bottom horiziontal lines along the elements dimensions. 

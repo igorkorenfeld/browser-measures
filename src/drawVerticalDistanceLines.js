@@ -53,10 +53,12 @@ function calculateDistances(a, b) {
 }
 
 function updateLines(e) {
+  if (!running) { return; }
   marks[marks.length - 1].style.top = `${e.clientY}px`;
 }
 
 function handleClick() {
+  if (!running) { return; }
   createMarks();
   if (marks.length > 2) {
     calculateDistances(marks[marks.length - 3], marks[marks.length - 2]);
@@ -84,6 +86,16 @@ function handleKeypress(e) {
   else if (e.code === 'KeyC') {
     clearLines();
     createMarks();
+  }
+  else if (e.code === 'KeyP') {
+    if (running) {
+      document.body.removeChild(marks[marks.length - 1 ]);
+      marks.pop();
+    }
+    else {
+      createMarks();
+    }
+    running = !running;
   }
 }
 

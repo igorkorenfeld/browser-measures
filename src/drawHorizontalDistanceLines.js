@@ -54,10 +54,12 @@ function calculateDistances(a, b) {
 }
 
 function updateLines(e) {
+  if (!running) { return; }
   marks[marks.length - 1].style.left = `${e.clientX}px`;
 }
 
 function handleClick() {
+  if (!running) { return; }
   createMarks();
   console.log("marks length:");
   console.log(marks.length);
@@ -88,6 +90,16 @@ function handleKeypress(e) {
   else if (e.code === 'KeyC') {
     clearLines();
     createMarks();
+  }
+  else if (e.code === 'KeyP') {
+    if (running) {
+      document.body.removeChild(marks[marks.length - 1 ]);
+      marks.pop();
+    }
+    else {
+      createMarks();
+    }
+    running = !running;
   }
 }
 
