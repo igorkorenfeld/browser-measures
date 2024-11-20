@@ -1,7 +1,7 @@
 let running = true;
 const fontSize = 12;
 
-/* Each "mark" is a an array of 2 div that create a intersecting lines. 
+/* Each "mark" is a an array of 2 div that create a intersecting lines.
  * The [0] is the vertical line and the [1] is the horiztonal line
  * */
 let marks = [];
@@ -30,15 +30,15 @@ function createMarks() {
   document.body.appendChild(vLine);
   document.body.appendChild(hLine);
   marks.push([vLine, hLine]);
-  
 
-/* Expects two marks a, b. Returns an object with two properties 
- * dx - horizontal distance  
- * dy - veritcal distance 
- */ 
+
+/* Expects two marks a, b. Returns an object with two properties
+ * dx - horizontal distance
+ * dy - veritcal distance
+ */
 function calculateDistances(a, b) {
-  const distances = { 
-    dx: parseInt(a[0].style.left) - parseInt(b[0].style.left), 
+  const distances = {
+    dx: parseInt(a[0].style.left) - parseInt(b[0].style.left),
     dy: parseInt(a[1].style.top) - parseInt(b[1].style.top)
   };
   dxLabel = document.createElement("div");
@@ -46,10 +46,10 @@ function calculateDistances(a, b) {
   labels.push([dxLabel, dyLabel]);
   dxLabel.appendChild(document.createTextNode(`${Math.abs(distances.dx)}`));
   dyLabel.appendChild(document.createTextNode(`${Math.abs(distances.dy)}`));
-  
+
   dxLabel.style.position = "absolute";
   dyLabel.style.position = "absolute";
-  
+
   // a.x < b.x
   if (distances.dx < 0) {
     dxLabel.style.left = a[0].style.left;
@@ -63,17 +63,17 @@ function calculateDistances(a, b) {
   // a.y < b.y , which means a is above b
   if (distances.dy < 0) {
     dxLabel.style.top = `${parseInt(b[1].style.top) - fontSize - 2}px`;
-    dyLabel.style.top = `${parseInt(a[1].style.top)}px` 
+    dyLabel.style.top = `${parseInt(a[1].style.top)}px`
     // dyLabel.style.top = `${parseInt(b[0].style.top) - 16}px`;
   }
   else {
     dxLabel.style.top = `${parseInt(a[1].style.top) - fontSize - 2}px`;
-    dyLabel.style.top = `${parseInt(b[1].style.top)}px` 
+    dyLabel.style.top = `${parseInt(b[1].style.top)}px`
     // dyLabel.style.top = `${parseInt(a[0].style.top) - 16}px`;
-  } 
+  }
   // dxLabel.style.width = `${Math.abs(distances.dx)}`;
   dxLabel.style.width = `${Math.abs(distances.dx)}px`;
-  dxLabel.style.textAlign = "center"; 
+  dxLabel.style.textAlign = "center";
   dxLabel.style.backgroundColor = "rgba(125, 16, 83, 0.75)"
   dxLabel.style.color = "rgba(242, 221, 242, 0.9)"
   dxLabel.style.fontFamily = "monospace, monospace";
@@ -83,7 +83,7 @@ function calculateDistances(a, b) {
 
 
   dyLabel.style.height = `${Math.abs(distances.dy)}px`;
-  dyLabel.style.verticalAlign = "middle"; 
+  dyLabel.style.verticalAlign = "middle";
   dyLabel.style.backgroundColor = "rgba(125, 16, 83, 0.75)";
   dyLabel.style.color = "rgba(242, 221, 242, 0.9)";
   dyLabel.style.display = "flex";
@@ -97,7 +97,7 @@ function calculateDistances(a, b) {
 function updateLines(e) {
   //vLine
   marks[marks.length - 1][0].style.left = `${e.clientX}px`;
-  
+
   //hLine
   marks[marks.length - 1][1].style.top = `${e.clientY}px`;
 }
@@ -126,7 +126,7 @@ function handleKeypress(e) {
     document.removeEventListener("keyup", handleKeypress);
   }
   else if (e.code === 'KeyP') {
-    running = !running; 
+    running = !running;
     if (!running) {
     document.querySelectorAll(".keyOutline").forEach((el) => el.classList.remove("keyOutline"));
     }

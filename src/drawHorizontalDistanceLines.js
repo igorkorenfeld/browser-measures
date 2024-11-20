@@ -1,9 +1,7 @@
 let running = true;
 const fontSize = 12;
 
-/* Each "mark" is a horizontal line
- * 
- */
+/* Each "mark" is a horizontal line */
 let marks = [];
 let labels = [];
 
@@ -21,12 +19,9 @@ function createMarks() {
 
   document.body.appendChild(vLine);
   marks.push(vLine);
-  
-
 }
 
-/* Expects two marks a, b, and add the calculated distance to the screen 
- */ 
+/* Expects two marks a, b, and add the calculated distance to the screen */
 function calculateDistances(a, b) {
   // Vertical distance
   console.log(parseInt(a.style.left) - parseInt(b.style.left));
@@ -34,18 +29,9 @@ function calculateDistances(a, b) {
   dxLabel = document.createElement("div");
   labels.push(dxLabel);
   dxLabel.appendChild(document.createTextNode(`${Math.abs(dx)}`));
-  
+
   dxLabel.style.position = "absolute";
-  
-  // a.y < b.y , which means a is above b
-  // if (dy < 0) {
-  //   dyLabel.style.top = `${parseInt(a.style.top)}px` 
-  //   // dyLabel.style.top = `${parseInt(b[0].style.top) - 16}px`;
-  // }
-  // else {
-  //   dyLabel.style.top = `${parseInt(b.style.top)}px` 
-  //   // dyLabel.style.top = `${parseInt(a[0].style.top) - 16}px`;
-  // } 
+
   // a.x < b.x
   if (dx < 0) {
     dxLabel.style.left = a.style.left;
@@ -56,7 +42,7 @@ function calculateDistances(a, b) {
   }
 
   dxLabel.style.width = `${Math.abs(dx)}px`;
-  dxLabel.style.textAlign = "center"; 
+  dxLabel.style.textAlign = "center";
   dxLabel.style.backgroundColor = "rgba(125, 16, 83, 0.75)"
   dxLabel.style.color = "rgba(242, 221, 242, 0.9)"
   dxLabel.style.fontFamily = "monospace, monospace";
@@ -68,7 +54,6 @@ function calculateDistances(a, b) {
 }
 
 function updateLines(e) {
-  //hLine
   marks[marks.length - 1].style.left = `${e.clientX}px`;
 }
 

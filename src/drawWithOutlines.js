@@ -20,11 +20,11 @@ elements.forEach((el)=> {
 
 function addOutline(e) {
   if(!running) return;
-  e.target.classList.add("keyOutline"); 
+  e.target.classList.add("keyOutline");
 }
 function removeOutline(e) {
   if(!running) return;
-  e.target.classList.remove("keyOutline"); 
+  e.target.classList.remove("keyOutline");
 }
 
 function clearLines() {
@@ -34,7 +34,7 @@ function clearLines() {
       mark.parentNode.removeChild(mark);
     }
   });
-} 
+}
 
 function handleKeypress(e) {
   if (e.code === 'KeyX')  {
@@ -48,7 +48,7 @@ function handleKeypress(e) {
     document.body.removeChild(styleSheet);
   }
   else if (e.code === 'KeyP') {
-    running = !running; 
+    running = !running;
     if (!running) {
     document.querySelectorAll(".keyOutline").forEach((el) => el.classList.remove("keyOutline"));
     }
@@ -71,7 +71,7 @@ function drawNearest(e) {
   let tCropmark = document.createElement("div");
   let bCropmark = document.createElement("div");
   marks.push(vCropmark, tCropmark, bCropmark);
-  
+
   //Left keyline
   vCropmark.style.position = "absolute";
   vCropmark.style.top = `0`;
