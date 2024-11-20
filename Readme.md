@@ -1,9 +1,9 @@
 # Browser measure
-This repo has a set of tools that will help measure distancee and draw lines to check alignment on a webpage. The tools are intended to be used as bookmarklets, or alternatively via the browser devtools JS console.
+This repo has a set of tools that will help measure distances and draw lines to check alignment on a webpage. The tools are intended to be used as bookmarklets or alternatively via the browser devtools JS console.
 
 
 ## Draw Distance Lines
-`drawDistanceLines` will add a vertical and horizontal lines to the the page based on the cursor position. Once more than one set of lines is added, it will show the horizontal and vertical distance between the last two drawn crop marks.
+`drawDistanceLines` will add a vertical and horizontal lines to the the page based on the cursor position. When more than one set of lines is added, it will show the horizontal and vertical distance between the last two added marks.
 
 ### Keys
 `x` - E**x**it the tool
