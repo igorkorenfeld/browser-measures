@@ -1,4 +1,5 @@
 let running = true;
+let skipMeasure = false;
 const fontSize = 12;
 
 /* Each "mark" is a horizontal line to denote the vertical distance  */
@@ -23,6 +24,10 @@ function createMarks() {
 
 /* Expects two marks a, b, and add the calculated distance to the screen */
 function calculateDistances(a, b) {
+  if (skipMeasure) {
+    skipMeasure = false;
+    return;
+  }
   // Vertical distance
   const dy = parseInt(a.style.top) - parseInt(b.style.top);
   dyLabel = document.createElement("div");
@@ -96,6 +101,9 @@ function handleKeypress(e) {
       createMarks();
     }
     running = !running;
+  }
+  else if (e.code === 'KeyS') {
+    skipMeasure = true;
   }
 }
 

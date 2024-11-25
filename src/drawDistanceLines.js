@@ -1,4 +1,5 @@
 let running = true;
+let skipMeasure = false;
 const fontSize = 12;
 
 /* Each "mark" is a an array of 2 div that create a intersecting lines.
@@ -37,6 +38,10 @@ function createMarks() {
  * dy - veritcal distance
  */
 function calculateDistances(a, b) {
+  if (skipMeasure) {
+    skipMeasure = false;
+    return;
+  }
   const distances = {
     dx: parseInt(a[0].style.left) - parseInt(b[0].style.left),
     dy: parseInt(a[1].style.top) - parseInt(b[1].style.top)
@@ -95,6 +100,7 @@ function calculateDistances(a, b) {
 }
 
 function updateLines(e) {
+  if (!running) { return; }
   //vLine
   marks[marks.length - 1][0].style.left = `${e.clientX}px`;
 
@@ -103,10 +109,24 @@ function updateLines(e) {
 }
 
 function handleClick() {
+  if (!running) { return; }
   createMarks();
   if (marks.length > 2) {
     calculateDistances(marks[marks.length - 3], marks[marks.length - 2]);
   }
+}
+
+function clearLines() {
+    marks.forEach((mark) => {
+      document.body.removeChild(mark[0]);
+      document.body.removeChild(mark[1]);
+    });
+    marks = [];
+    labels.forEach((label) => {
+      document.body.removeChild(label[0]);
+      document.body.removeChild(label[1]);
+    });
+    labels = [];
 }
 
 function handleKeypress(e) {
@@ -125,11 +145,26 @@ function handleKeypress(e) {
     document.removeEventListener("click", handleClick);
     document.removeEventListener("keyup", handleKeypress);
   }
+  else if (e.code === 'KeyC') {
+    clearLines();
+    createMarks();
+  }
   else if (e.code === 'KeyP') {
-    running = !running;
-    if (!running) {
-    document.querySelectorAll(".keyOutline").forEach((el) => el.classList.remove("keyOutline"));
+    if (running) {
+      const el = marks[marks.length - 1];
+      console.log(el);
+      console.log(el.paretNode);
+      document.body.removeChild(el[0]);
+      document.body.removeChild(el[1]);
+      marks.pop();
     }
+    else {
+      createMarks();
+    }
+    running = !running;
+  }
+  else if (e.code === 'KeyS') {
+    skipMeasure = true;
   }
 }
 

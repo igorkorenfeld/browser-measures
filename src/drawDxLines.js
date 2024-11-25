@@ -1,4 +1,5 @@
 let running = true;
+let skipMeasure = false;
 const fontSize = 12;
 const docHeight = Math.max(
   document.body.scrollHeight, document.documentElement.scrollHeight,
@@ -26,11 +27,15 @@ function createMarks() {
   marks.push(vLine);
 }
 
-/* Expects two marks a, b, and add the calculated distance to the screen 
+/* Expects two marks a, b, and add the calculated distance to the screen
  * along with the clientY position to plot the label
  * */
 
 function calculateDistances(a, b, clientY) {
+  if (skipMeasure) {
+    skipMeasure = false;
+    return;
+  }
   // Vertical distance
   console.log(parseInt(a.style.left) - parseInt(b.style.left));
   const dx = parseInt(a.style.left) - parseInt(b.style.left);
@@ -108,6 +113,9 @@ function handleKeypress(e) {
       createMarks();
     }
     running = !running;
+  }
+  else if (e.code === 'KeyS') {
+    skipMeasure = true;
   }
 }
 
