@@ -152,8 +152,6 @@ function handleKeypress(e) {
   else if (e.code === 'KeyP') {
     if (running) {
       const el = marks[marks.length - 1];
-      console.log(el);
-      console.log(el.paretNode);
       document.body.removeChild(el[0]);
       document.body.removeChild(el[1]);
       marks.pop();

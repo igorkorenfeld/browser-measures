@@ -30,7 +30,7 @@ function calculateDistances(a, b) {
   }
   // Vertical distance
   const dy = parseInt(a.style.top) - parseInt(b.style.top);
-  dyLabel = document.createElement("div");
+  const dyLabel = document.createElement("div");
   labels.push(dyLabel);
   dyLabel.appendChild(document.createTextNode(`${Math.abs(dy)}`));
 

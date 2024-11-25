@@ -37,9 +37,8 @@ function calculateDistances(a, b, clientY) {
     return;
   }
   // Vertical distance
-  console.log(parseInt(a.style.left) - parseInt(b.style.left));
   const dx = parseInt(a.style.left) - parseInt(b.style.left);
-  dxLabel = document.createElement("div");
+  const dxLabel = document.createElement("div");
   labels.push(dxLabel);
   dxLabel.appendChild(document.createTextNode(`${Math.abs(dx)}`));
 
@@ -74,9 +73,6 @@ function updateLines(e) {
 function handleClick(e) {
   if (!running) { return; }
   createMarks();
-  console.log("marks length:");
-  console.log(marks.length);
-  console.log(marks);
   if (marks.length > 2) {
     calculateDistances(marks[marks.length - 3], marks[marks.length - 2], e.clientY);
   }
