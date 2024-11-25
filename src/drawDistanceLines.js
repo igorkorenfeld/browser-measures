@@ -46,8 +46,8 @@ function calculateDistances(a, b) {
     dx: parseInt(a[0].style.left) - parseInt(b[0].style.left),
     dy: parseInt(a[1].style.top) - parseInt(b[1].style.top)
   };
-  dxLabel = document.createElement("div");
-  dyLabel = document.createElement("div");
+  const dxLabel = document.createElement("div");
+  const dyLabel = document.createElement("div");
   labels.push([dxLabel, dyLabel]);
   dxLabel.appendChild(document.createTextNode(`${Math.abs(distances.dx)}`));
   dyLabel.appendChild(document.createTextNode(`${Math.abs(distances.dy)}`));
