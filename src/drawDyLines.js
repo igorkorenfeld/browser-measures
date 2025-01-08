@@ -81,6 +81,26 @@ function clearLines() {
     labels = [];
 }
 
+function undoLast() {
+  // Need to have at least two marks (includig the one currenly being placed) to undo
+  if (marks.length < 2) return;
+  const targetMark = marks[marks.length - 2];
+  if (labels.length > 0) {
+    const targetLabel = labels[labels.length - 1];
+    if ( (targetMark.getBoundingClientRect().top == targetLabel.getBoundingClientRect().top) ||
+         (targetMark.getBoundingClientRect().top == targetLabel.getBoundingClientRect().bottom)
+    ) { 
+      document.body.removeChild(targetLabel);
+      labels.pop(); 
+    }
+  }
+
+  document.body.removeChild(targetMark);
+  currentMark = marks[marks.length - 1]
+  marks = marks.slice(0, -2)
+  marks.push(currentMark)
+}
+
 function handleKeypress(e) {
   if (e.code === 'KeyX')  {
     clearLines();
@@ -104,6 +124,9 @@ function handleKeypress(e) {
   }
   else if (e.code === 'KeyS') {
     skipMeasure = true;
+  }
+  else if (e.code === 'KeyU') {
+    undoLast();
   }
 }
 
