@@ -91,7 +91,7 @@ function clearLines() {
 }
 
 function undoLast() {
-  // Need to have at least two marks (includig the one currenly being placed) to undo
+  // Need to have at least two marks (including the one currenly being placed) to undo
   if (marks.length < 2) return;
   const targetMark = marks[marks.length - 2];
   if (labels.length > 0) {

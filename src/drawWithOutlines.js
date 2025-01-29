@@ -2,6 +2,12 @@ let running = true;
 
 let marks = [];
 
+const docHeight = Math.max(
+  document.body.scrollHeight, document.documentElement.scrollHeight,
+  document.body.offsetHeight, document.documentElement.offsetHeight,
+  document.body.clientHeight, document.documentElement.clientHeight
+);
+
 const outlineStyle = `
 .keyOutline {
   outline: 2px solid rgba(0, 220, 250, .65);
@@ -36,6 +42,17 @@ function clearLines() {
   });
 }
 
+function undoLast() {
+  // Need to have at least 3 marks (includig the one currenly being placed) to undo
+  if (marks.length < 3) return;
+
+  //Each click adds 3 marks so must remove the last 3
+  for (let i = 0; i < 3; i++) {
+    document.body.removeChild(marks[marks.length - 1]);
+    marks.pop()
+  }
+}
+
 function handleKeypress(e) {
   if (e.code === 'KeyX')  {
     clearLines();
@@ -57,6 +74,10 @@ function handleKeypress(e) {
   else if (e.code === 'KeyC') {
     clearLines();
   }
+
+  else if (e.code === 'KeyU') {
+    undoLast();
+  }
 }
 
 function drawNearest(e) {
@@ -77,7 +98,7 @@ function drawNearest(e) {
   vCropmark.style.top = `0`;
   vCropmark.style.left = `${rect.left + window.scrollX}px`;
   vCropmark.style.width = "1px";
-  vCropmark.style.height = `${window.innerHeight}px`;
+  vCropmark.style.height = `${docHeight}px`;
   vCropmark.style.borderLeft = "1px solid rgba(250, 0, 250, .5)";
 
   //Top keyline
