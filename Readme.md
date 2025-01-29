@@ -14,6 +14,7 @@ This repo has a set of tools that will help measure distances and draw lines to 
 
 `s` - **S**kip calculating a distance, but allow to add a line. Once a line is added, the next distance will be calculated as normal, unless "s" is pressed again. 
 
+`u` - **U**ndo the last set of lines and labels
 
 ### Bookmarklet code
 ```javascript
@@ -32,6 +33,7 @@ javascript:(function(){let e=!0,t=!1;const o=Math.max(document.body.scrollHeight
 
 `s` - **S**kip calculating a distance, but allow to add a line. Once a line is added, the next distance will be calculated as normal, unless "s" is pressed again. 
 
+`u` - **U**ndo the last line and remove its corresponding label
 
 ### Bookmarklet code
 ```javascript
@@ -49,6 +51,8 @@ javascript:(function(){let e=!0,t=!1;let o=[],n=[];function l(){const e=document
 
 `s` - **S**kip calculating a distance, but allow to add a line. Once a line is added, the next distance will be calculated as normal, unless "s" is pressed again. 
 
+`u` - **U**ndo the last line and remove its corresponding label
+
 
 ### Bookmarklet code
 ```javascript
@@ -65,6 +69,8 @@ javascript:(function(){let e=!0,t=!1;const n=Math.max(document.body.scrollHeight
 `c` - **C**lear any existing lines and continue adding new lines
 
 `p` - **P**ause the tool but keep existing lines, clear all outlines. Pause can be toggled on and off
+
+`u` - **U**ndo the last set of lines
 
 
 ### Bookmarklet code
