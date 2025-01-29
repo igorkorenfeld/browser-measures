@@ -1,6 +1,11 @@
 let running = true;
 let skipMeasure = false;
 const fontSize = 12;
+const docHeight = Math.max(
+  document.body.scrollHeight, document.documentElement.scrollHeight,
+  document.body.offsetHeight, document.documentElement.offsetHeight,
+  document.body.clientHeight, document.documentElement.clientHeight
+);
 
 /* Each "mark" is a an array of 2 div that create a intersecting lines.
  * The [0] is the vertical line and the [1] is the horiztonal line
@@ -18,7 +23,7 @@ function createMarks() {
   vLine.style.top = `0`;
   vLine.style.left = `0`;
   vLine.style.width = "1px";
-  vLine.style.height = `${window.innerHeight}px`;
+  vLine.style.height = `${docHeight}px`;
   vLine.style.borderLeft = "1px solid rgba(250, 0, 250, .5)";
   vLine.style.zIndex='9999'
 

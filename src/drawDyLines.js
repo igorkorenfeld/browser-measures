@@ -17,6 +17,7 @@ function createMarks() {
   hLine.style.width = "100vw";
   hLine.style.height = "1px";
   hLine.style.borderTop = "1px solid rgba(250, 0, 250, .5)";
+  hLine.style.zIndex = "9999";
 
   document.body.appendChild(hLine);
   marks.push(hLine);

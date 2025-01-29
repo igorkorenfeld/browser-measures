@@ -22,6 +22,7 @@ function createMarks() {
   vLine.style.width = "1px";
   vLine.style.height = `${docHeight}px`;
   vLine.style.borderLeft = "1px solid rgba(250, 0, 250, .5)";
+  vLine.style.zIndex = "9999";
 
   document.body.appendChild(vLine);
   marks.push(vLine);
