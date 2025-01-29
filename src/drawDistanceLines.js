@@ -20,6 +20,7 @@ function createMarks() {
   vLine.style.width = "1px";
   vLine.style.height = `${window.innerHeight}px`;
   vLine.style.borderLeft = "1px solid rgba(250, 0, 250, .5)";
+  vLine.style.zIndex='9999'
 
   hLine.style.position = "absolute";
   hLine.style.top = 0;
@@ -27,6 +28,7 @@ function createMarks() {
   hLine.style.width = "100vw";
   hLine.style.height = "1px";
   hLine.style.borderTop = "1px solid rgba(250, 0, 250, .5)";
+  vLine.style.zIndex='9999'
 
   document.body.appendChild(vLine);
   document.body.appendChild(hLine);
