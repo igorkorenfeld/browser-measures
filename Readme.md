@@ -1,6 +1,12 @@
-# Browser measure
+# Browser measures
 This repo has a set of tools that will help measure distances and draw lines to check alignment on a webpage. The tools are intended to be used as bookmarklets or alternatively via the browser devtools JS console.
 
+## Summary
+1. [Draw Distance Lines](#draw-distance-lines) - Measure the vertical and horizontal distance between two points.
+2. [Draw dy Lines](#draw-dy-lines) - Measure the vertical distance between two points.
+2. [Draw dx Lines](#draw-dx-lines) - Measure the horizontal distance between two points.
+3. [Draw with Outlines](#draw-with-outlines) - Highlight element, draw lines along the top, bottom, and left sides.
+5. [Make Outlines](#make-outlines) - Add an outline around every element on the page.
 
 ## Draw Distance Lines
 `drawDistanceLines` will add a vertical and horizontal lines to the the page based on the cursor position. When more than one set of lines is added, it will show the horizontal and vertical distance between the last two added marks.
