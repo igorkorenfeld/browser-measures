@@ -112,7 +112,7 @@ function updateLines(e) {
   marks[marks.length - 1][0].style.left = `${e.clientX}px`;
 
   //hLine
-  marks[marks.length - 1][1].style.top = `${e.clientY}px`;
+  marks[marks.length - 1][1].style.top = `${e.clientY + window.scrollY}px`;
 }
 
 function handleClick() {
