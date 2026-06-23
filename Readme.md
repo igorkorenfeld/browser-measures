@@ -103,9 +103,9 @@ javascript:(function(){ let e=!0;const n=document.createElement("style");functio
 
 `x` - E**x**it the tool
 
-`t` - Set the mode to scroll to the [t]op of the element (default)
+`t` - Set the mode to scroll to the **t**op of the element (default)
 
-`b` - Set the mode to scroll to the [b]ottom of the element
+`b` - Set the mode to scroll to the **b**ottom of the element
 
 ```
 javascript: (function(){const e=document.createElement("style");e.textContent="\n*:hover {\n  outline: 2px solid rgba(0, 220, 250, .65);\n  box-shadow: 0px 3px 12px rgba(125, 153, 170, .9);\n}\n\n.scrollActive {\n  outline: 2px solid rgba(16, 166, 61, 0.78);\n}\n\n.marker {\n  background-color: hsl(80deg, 80%, 80%);\n  color: hsl(80deg, 90%, 10%);\n  position: fixed;\n  margin: 0px 0px;\n  padding: 8px 4px;\n  top: 0;\n  right: 0;\n}\n",document.body.appendChild(e);const n=document.createElement("p");let t=!0;function o(e){n.innerText=e?"Scroll top":"Scroll bottom"}function c(e){e.target.classList.add("scrollActive"),e.target.scrollIntoView(t),setTimeout(()=>{e.target.classList.remove("scrollActive")},750)}n.classList.add("marker"),o(t),document.body.appendChild(n),document.addEventListener("click",c),document.addEventListener("keyup",function d(r){"KeyX"===r.code&&(e.remove(),n.remove(),document.removeEventListener("click",c),document.removeEventListener("keyup",d));"KeyB"===r.code&&(t=!1,o(t));"KeyT"===r.code&&(t=!0,o(t))});})();
