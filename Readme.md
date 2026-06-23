@@ -7,6 +7,7 @@ This repo has a set of tools that will help measure distances and draw lines to 
 2. [Draw dx Lines](#draw-dx-lines) - Measure the horizontal distance between two points.
 3. [Draw with Outlines](#draw-with-outlines) - Highlight element, draw lines along the top, bottom, and left sides.
 5. [Make Outlines](#make-outlines) - Add an outline around every element on the page.
+5. [Scroller](#scroller) - Add an outline around every element on the page.
 
 ## Draw Distance Lines
 `drawDistanceLines` will add a vertical and horizontal lines to the the page based on the cursor position. When more than one set of lines is added, it will show the horizontal and vertical distance between the last two added marks.
@@ -101,7 +102,9 @@ javascript:(function(){ let e=!0;const n=document.createElement("style");functio
 `Scroller` will scroll to an element if the page is scrollable. 
 
 `x` - E**x**it the tool
+
 `t` - Set the mode to scroll to the [t]op of the element (default)
+
 `b` - Set the mode to scroll to the [b]ottom of the element
 
 ```
