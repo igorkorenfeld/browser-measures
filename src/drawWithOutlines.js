@@ -19,17 +19,17 @@ styleSheet.textContent = outlineStyle
 document.body.appendChild(styleSheet);
 
 const elements = document.querySelectorAll("*");
-elements.forEach((el)=> {
+elements.forEach((el) => {
   el.addEventListener('mouseenter', addOutline);
   el.addEventListener('mouseleave', removeOutline);
 });
 
 function addOutline(e) {
-  if(!running) return;
+  if (!running) return;
   e.target.classList.add("keyOutline");
 }
 function removeOutline(e) {
-  if(!running) return;
+  if (!running) return;
   e.target.classList.remove("keyOutline");
 }
 
@@ -43,18 +43,19 @@ function clearLines() {
 }
 
 function undoLast() {
-  // Need to have at least 3 marks (includig the one currenly being placed) to undo
-  if (marks.length < 3) return;
+  const NUM_MARKS = 4
+  // Need to have at least 4 marks (includig the one currenly being placed) to undo
+  if (marks.length < NUM_MARKS) return;
 
-  //Each click adds 3 marks so must remove the last 3
-  for (let i = 0; i < 3; i++) {
+  //Each click adds 4 marks so must remove the last 4
+  for (let i = 0; i < NUM_MARKS; i++) {
     document.body.removeChild(marks[marks.length - 1]);
     marks.pop()
   }
 }
 
 function handleKeypress(e) {
-  if (e.code === 'KeyX')  {
+  if (e.code === 'KeyX') {
     clearLines();
     document.removeEventListener("click", drawNearest);
     document.removeEventListener("keyup", handleKeypress);
@@ -67,7 +68,7 @@ function handleKeypress(e) {
   else if (e.code === 'KeyP') {
     running = !running;
     if (!running) {
-    document.querySelectorAll(".keyOutline").forEach((el) => el.classList.remove("keyOutline"));
+      document.querySelectorAll(".keyOutline").forEach((el) => el.classList.remove("keyOutline"));
     }
   }
 
@@ -88,18 +89,27 @@ function drawNearest(e) {
   let el = document.elementFromPoint(ex, ey)
 
   let rect = el.getBoundingClientRect();
-  let vCropmark = document.createElement("div");
+  let lCropmark = document.createElement("div");
+  let rCropmark = document.createElement("div");
   let tCropmark = document.createElement("div");
   let bCropmark = document.createElement("div");
-  marks.push(vCropmark, tCropmark, bCropmark);
+  marks.push(lCropmark, rCropmark, tCropmark, bCropmark);
 
   //Left keyline
-  vCropmark.style.position = "absolute";
-  vCropmark.style.top = `0`;
-  vCropmark.style.left = `${rect.left + window.scrollX}px`;
-  vCropmark.style.width = "1px";
-  vCropmark.style.height = `${docHeight}px`;
-  vCropmark.style.borderLeft = "1px solid rgba(250, 0, 250, .5)";
+  lCropmark.style.position = "absolute";
+  lCropmark.style.top = `0`;
+  lCropmark.style.left = `${rect.left + window.scrollX}px`;
+  lCropmark.style.width = "1px";
+  lCropmark.style.height = `${docHeight}px`;
+  lCropmark.style.borderLeft = "1px solid rgba(250, 0, 250, .5)";
+
+  //Right keyline
+  rCropmark.style.position = "absolute";
+  rCropmark.style.top = `0`;
+  rCropmark.style.left = `${rect.right + window.scrollX}px`;
+  rCropmark.style.width = "1px";
+  rCropmark.style.height = `${docHeight}px`;
+  rCropmark.style.borderLeft = "1px solid rgba(250, 0, 250, .5)";
 
   //Top keyline
   tCropmark.style.position = "absolute";
@@ -117,7 +127,8 @@ function drawNearest(e) {
   bCropmark.style.height = "1px";
   bCropmark.style.borderTop = "1px solid rgba(250, 0, 250, .5)";
 
-  document.body.appendChild(vCropmark);
+  document.body.appendChild(lCropmark);
+  document.body.appendChild(rCropmark);
   document.body.appendChild(tCropmark);
   document.body.appendChild(bCropmark);
 }
